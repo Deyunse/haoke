@@ -4,3 +4,8 @@ export const getSwiper = () => {
     url: '/home/swiper'
   })
 }
+export const getGroups = () => {
+  return request({
+    url: '/home/groups'
+  })
+}

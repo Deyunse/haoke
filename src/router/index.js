@@ -6,12 +6,16 @@ const My = () => import('@/views/My')
 const News = () => import('@/views/NewS')
 const RentHouse = () => import('@/views/RentHouse')
 const Login = () => import('@/views/Login')
+const Release = () => import('@/views/release')
+const CollEction = () => import('@/views/Collection')
+const MyLease = () => import('@/views/MyLease')
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     component: Layout,
+    redirect: '/home',
     children: [
       { path: 'home', component: Home },
       { path: 'my', component: My, name: 'my' },
@@ -19,7 +23,10 @@ const routes = [
       { path: 'renthouse', component: RentHouse }
     ]
   },
-  { path: '/login', component: Login }
+  { path: '/login', component: Login },
+  { path: '/release', component: Release },
+  { path: '/collection', component: CollEction },
+  { path: '/mylease', component: MyLease }
 ]
 
 const router = new VueRouter({

@@ -3,7 +3,7 @@
     <!-- 背景图 -->
     <div class="myTitle">
       <!-- 有token -->
-      <div class="personal" v-if="isLoginShow">
+      <div class="personal" v-if="$store.state.user && $store.state.user.token">
         <img :src="`http://liufusong.top:8080${userObj.avatar}`" alt="" />
         <p>{{ userObj.nickname }}</p>
         <span @click="loginOut">退出</span>
@@ -17,8 +17,8 @@
       </div>
     </div>
     <van-grid clickable :border="false" :column-num="3">
-      <van-grid-item icon="home-o" text="路由跳转" to="/" />
-      <van-grid-item icon="home-o" text="路由跳转" to="/" />
+      <van-grid-item icon="star-o" text="我的收藏" to="/collection" />
+      <van-grid-item icon="wap-home-o" text="我的出租" to="/mylease" />
       <van-grid-item icon="home-o" text="路由跳转" to="/" />
       <van-grid-item icon="home-o" text="路由跳转" to="/" />
       <van-grid-item icon="home-o" text="路由跳转" to="/" />
@@ -32,22 +32,22 @@
 import { getUser } from '@/api/user'
 export default {
   created () {
+    this.grtUserInfo()
   },
   data () {
     return {
       userObj: {
 
-      },
-      isLoginShow: true
+      }
 
     }
   },
   methods: {
-
+    // 获取用户信息
     async grtUserInfo () {
       try {
-        const res = await getUser(this.$store.state.user)
-        console.log(res)
+        const res = await getUser()
+        // console.log(res)
         this.userObj = res.data.body
         // console.log(this.userObj.avatar)
       } catch (err) {
@@ -60,7 +60,6 @@ export default {
       })
         .then(() => {
           // on confirm
-          this.isLoginShow = false
           this.$store.commit('setUser', null)
         })
         .catch(() => {
@@ -75,10 +74,6 @@ export default {
   filters: {},
   components: {},
   mounted () {
-    this.grtUserInfo()
-    if (this.$store.state.user === null) {
-      this.isLoginShow = false
-    } else { this.isLoginShow = true }
   }
 }
 </script>
@@ -102,11 +97,11 @@ export default {
       margin-top: 50px;
     }
     span {
-      width: 55px;
+      width: 70px;
       display: block;
       margin: 0 auto;
       background-color: #21b97a;
-      font-size: 13px;
+      font-size: 8px;
       height: 30px;
       line-height: 30px;
       padding: 0 15px;

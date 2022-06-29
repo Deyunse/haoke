@@ -2,7 +2,7 @@
   <div>
     <van-nav-bar title="账号登录">
       <template #left>
-        <van-icon name="arrow" @click="$router.back()" />
+        <van-icon name="arrow-left" @click="$router.back()" />
       </template>
     </van-nav-bar>
     <van-form @submit="onSubmit(user)" ref="form">
@@ -56,12 +56,11 @@ export default {
       if (values.username === '' && values.password === '') return this.$toast.fail('账户或密码不能为空')
       try {
         const res = await login(values)
-        console.log(res)
         if (res.data.body.token) {
           this.$toast.success('登录成功')
-          this.$store.commit('setUser', res.data.body.token)
-          console.log(res.data.body.token)
-          this.$router.push({ name: 'my' })
+          this.$store.commit('setUser', res.data.body)
+          // console.log(res.data.body.token)
+          this.$router.push({ path: '/home' })
         } else {
           this.$toast.fail('账户或密码错误')
         }
