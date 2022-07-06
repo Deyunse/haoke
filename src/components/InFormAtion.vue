@@ -6,7 +6,7 @@
       </div>
       <div class="right">
         <h6>{{ item.title }}</h6>
-        <span>三室/123东/亮马水晶</span>
+        <span>{{item.desc}}</span>
         <p>{{ item.tags[0] }}</p>
         <h5>{{ item.price }}元/月</h5>
       </div>
@@ -43,15 +43,15 @@ export default {
   height: 120px;
   padding: 0 10px;
   display: flex;
-  border-bottom:1px solid #afb2b3;
+  border-bottom: 1px solid #afb2b3;
   .left {
     padding-top: 18px;
     width: 106px;
     height: 80px;
     margin-right: 15px;
-    img{
+    img {
       width: 100%;
-      height: 80px;
+      height: 100%;
     }
   }
   .right {

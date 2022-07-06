@@ -9,6 +9,8 @@ const Login = () => import('@/views/Login')
 const Release = () => import('@/views/release')
 const CollEction = () => import('@/views/Collection')
 const MyLease = () => import('@/views/MyLease')
+const CitySele = () => import('@/views/CitySele')
+const HouseSearch = () => import('@/views/release/components/HouseSearch.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,7 +28,9 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/release', component: Release },
   { path: '/collection', component: CollEction },
-  { path: '/mylease', component: MyLease }
+  { path: '/mylease', component: MyLease },
+  { path: '/citysele', component: CitySele },
+  { path: '/housesearch', component: HouseSearch, name: 'housesearch' }
 ]
 
 const router = new VueRouter({

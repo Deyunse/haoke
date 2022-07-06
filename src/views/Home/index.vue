@@ -6,18 +6,14 @@
       /></van-swipe-item>
     </van-swipe>
     <div class="search">
-      <van-search
-        v-model="value"
-        show-action
-        label="北京"
-        placeholder="请输入搜索关键词"
-      >
+      <van-search v-model="value" show-action placeholder="请输入搜索关键词">
         <template #action>
           <van-icon name="guide-o" size="25px" class="map" />
         </template>
-        <template #label
-          >北京
-          <van-icon name="location-o" size="16px" />
+        <template #label>
+          <div @click="$router.push({ path: '/citysele' })">
+            <span>{{ $store.state.city }}</span> <van-icon name="arrow-down" />
+          </div>
         </template>
       </van-search>
     </div>

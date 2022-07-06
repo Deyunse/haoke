@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var data = [
+        {
+          id: 0,
+          name: '父亲',
+          children: [
+            {
+              id: 1,
+              name: '儿子',
+              children: [
+                {
+                  id: 2,
+                  name: '孙子',
+                  children: [{ id: 2, name: '磨子' }],
+                },
+              ],
+            },
+          ],
+        },
+      ]
+      function handleData(data) {
+        for (let i in data) {
+          if (data[i].children) {
+            handleData(data[i].children)
+          }
+          this.optionList.push(data[i])
+        }
+      }
+      console.log(handleData(data))
+    </script>
+  </body>
+</html>

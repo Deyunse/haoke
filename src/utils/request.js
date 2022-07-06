@@ -1,8 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
 const instance = axios.create({
-  baseURL: 'http://liufusong.top:8080',
-  timeout: 5000
+  baseURL: 'http://liufusong.top:8080'
 })
 export default instance
 // 添加请求拦截器
