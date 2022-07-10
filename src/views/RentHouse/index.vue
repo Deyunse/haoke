@@ -30,6 +30,8 @@
             :columns="modeList"
             show-toolbar
             toolbar-position="bottom"
+            @confirm="onConfirm1"
+            @cancel="onCancel1"
           />
         </template>
       </van-dropdown-item>
@@ -40,6 +42,7 @@
             :columns="pricelist"
             show-toolbar
             toolbar-position="bottom"
+            @confirm="onConfirm2"
           />
         </template>
       </van-dropdown-item>
@@ -82,6 +85,8 @@
               span="12"
               v-for="(item, index) in region.oriented"
               :key="index"
+              @click="onClick1(item.label)"
+              :class="selection.includes(item.label) ? 'active' : ''"
             >
               {{ item.label }}
             </van-col>
@@ -95,6 +100,8 @@
               span="12"
               v-for="(item, index) in region.floor"
               :key="index"
+              @click="onClick1(item.label)"
+              :class="selection.includes(item.label) ? 'active' : ''"
             >
               {{ item.label }}
             </van-col>
@@ -108,6 +115,8 @@
               span="12"
               v-for="(item, index) in region.characteristic"
               :key="index"
+              @click="onClick1(item.label)"
+              :class="selection.includes(item.label) ? 'active' : ''"
             >
               {{ item.label }}
             </van-col>
@@ -123,7 +132,6 @@
 </template>
 
 <script>
-import { Toast } from 'vant'
 import InFormAtion from '@/components/InFormAtion.vue'
 // 获取房源
 import { getHouses, getCondition } from '@/api/houses'
@@ -150,7 +158,11 @@ export default {
         asea: '',
         subway: '',
         pentType: '',
-        price: ''
+        price: '',
+        roomType: '',
+        floor: '',
+        start: 1,
+        send: 20
       }
     }
   },
@@ -161,7 +173,27 @@ export default {
       console.log(value)
       // Toast(`当前值：${value}, 当前索引：${index}`)
       const val = value[2] ? value[2] : value[1]
-      // console.log(val)
+      if (value[0] === '区域') {
+        // 区域
+        this.deeplist[0].children.forEach(item => {
+          item.children.forEach(item => {
+            if (item.text === val) {
+              console.log(item.value)
+              this.state.asea = item.value
+            }
+          })
+        })
+      } else {
+        // 地铁
+        this.deeplist[1].children.forEach(item => {
+          item.children.forEach(item => {
+            if (item.text === val) {
+              console.log(item.value)
+              this.state.subway = item.value
+            }
+          })
+        })
+      }
       // const result = this.findValue(this.deeplist[0].children, val)
       // console.log(result)
       // this.deeplist[0].forEach(item => {
@@ -173,6 +205,18 @@ export default {
     onCancel () {
       console.log(234)
     },
+    // 方式
+    onConfirm1 (value) {
+      this.state.pentType = value.value
+    },
+    onCancel1 () {
+
+    },
+    // 租金
+    onConfirm2 (value) {
+      console.log(value)
+      this.state.price = value.value
+    },
     onClick1 (val) {
       if (this.selection.includes(val)) {
         const index = this.selection.indexOf(val)
@@ -180,6 +224,13 @@ export default {
       } else {
         this.selection.push(val)
       }
+      this.region.roomType.forEach(item => {
+        if (item.label.includes(val)) {
+          let arr = []
+          arr.push(item.value)
+          this.roomType = arr.join('|')
+        }
+      })
     },
     formatregion,
     formathandl

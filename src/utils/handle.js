@@ -10,3 +10,8 @@ export const formathandl = function (obj) {
   const formatStr = JSON.stringify(obj).replace(reg, 'text')
   return JSON.parse(formatStr)
 }
+// 筛选
+export const formscreen = function (arr, val) {
+  arr.forEach(item => {
+  })
+}

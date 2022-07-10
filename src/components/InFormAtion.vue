@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="house" v-for="(item, index) in list" :key="index">
+    <div class="house" v-for="(item, index) in list" :key="index" >
       <div class="left">
         <img :src="`http://liufusong.top:8080${item.houseImg}`" alt="" />
       </div>
